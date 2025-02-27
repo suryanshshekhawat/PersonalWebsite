@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jagged Grid Responsive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Responsive text scaling */
+    .responsive-text {
+      font-size: clamp(1.5rem, 4vw, 5rem); /* General responsive text size */
+    }
+
+    /* SOFTWARE has slightly smaller text */
+    .software-text {
+      font-size: clamp(3rem, 6vw, 9rem); /* Slightly smaller than before */
+    }
+
+    /* AI has super massive text */
+    .ai-text {
+      font-size: clamp(5rem, 10vw, 15rem); /* Extremely large AI text */
+    }
+
+    /* Custom Tailwind Grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr 1.2fr; /* SOFTWARE is slightly less wide */
+      grid-template-rows: 75vh 50vh 45vh; /* EDUCATION is half its previous height */
+      gap: 8px; /* Adds spacing between elements */
+      width: 100vw;
+      height: 100vh;
+      padding: 16px;
+    }
+
+    /* Custom placement for jagged effect */
+    .software, .mathematics, .propulsion, .ai, .art, .media, .education {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* PROPULSION & AI STACKED PROPERLY */
+    .propulsion-ai-container { 
+      grid-column: 3 / 4; 
+      grid-row: 1 / 2; 
+      display: flex; 
+      flex-direction: column; 
+      position: relative;
+      height: 100%; /* Ensure it fills space */
+    }
+    .propulsion, .ai {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Second Row (Half-Width & Taller) */
+    .art { grid-column: 1 / 3; grid-row: 2 / 3; height: 100%; }
+    .media { grid-column: 3 / 4; grid-row: 2 / 3; height: 100%; }
+
+    /* Third Row (Reduced Height) */
+    .education { grid-column: 1 / 4; grid-row: 3 / 4; }
+
+    /* Separate text from div so effects don't interfere */
+    .title {
+      position: absolute;
+      color: white;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-align: center;
+      pointer-events: none; /* Prevents interaction interference */
+    }
+
+    /* Rotate SOFTWARE & MATHEMATICS (Bottom to Top) and Center it */
+    .rotate-text {
+      transform: rotate(-90deg);
+      transform-origin: center;
+      white-space: nowrap; /* Prevents text from breaking */
+      left: 50%;
+      top: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+
+  </style>
+</head>
+<body class="bg-black flex justify-center items-center p-0 m-0">
+
+  <!-- GRID CONTAINER -->
+  <div class="grid-container">
+
+    <!-- First Row -->
+    <div class="bg-gray-800 software">
+      <span class="title software-text rotate-text">SOFTWARE</span>
+    </div>
+    <div class="bg-gray-700 mathematics">
+      <span class="title responsive-text rotate-text">MATHEMATICS</span>
+    </div>
+
+    <!-- PROPULSION & AI STACKED INSIDE FIRST ROW -->
+    <div class="propulsion-ai-container">
+      <div class="bg-gray-600 propulsion">
+        <span class="title responsive-text">PROPULSION</span>
+      </div>
+      <div class="bg-gray-500 ai">
+        <span class="title ai-text">AI</span>
+      </div>
+    </div>
+
+    <!-- Second Row (Now Half-Width & Taller) -->
+    <div class="bg-gray-400 art">
+      <span class="title responsive-text">ART</span>
+    </div>
+    <div class="bg-gray-300 media">
+      <span class="title responsive-text">MEDIA</span>
+    </div>
+
+    <!-- Third Row (Reduced Height) -->
+    <div class="bg-gray-900 education">
+      <span class="title responsive-text">EDUCATION</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
